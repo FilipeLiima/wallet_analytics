@@ -40,14 +40,13 @@ def main():
     st.sidebar.write('Você selecionou:', opcao)
 
     # Botão para adicionar ativo ao banco de dados
-    if st.sidebar.button("Adicionar Ativo", key="adicionar_ativo_button"):
+    if st.sidebar.button("Adicionar compra de ativo", key="adicionar_ativo_button"):
         adicionar_ativo(conn, opcao, quantidade, valor_pago)
         st.success(f"Ativo {opcao} adicionado com sucesso!")
    
     # Botão para excluir ativo
-    excluir_button = st.sidebar.button("Excluir Ativo", key="excluir_ativo_button")
+    excluir_button = st.sidebar.button("Adicionar venda de ativo", key="excluir_ativo_button")
 
- 
 
     if excluir_button and opcao_excluir:
         if excluir_ativo(conn, opcao_excluir):
@@ -77,25 +76,34 @@ def main():
             "Valor Pago": format_decimal(ativo[3]),
             "Data Transação": format_datetime(ativo[4]),
             "Volume Total Acumulado": format_decimal(volume_total_acumulado),
+            
         })
 
     # Criar um DataFrame Pandas com os dados formatados
     df = pd.DataFrame(formatted_data)
+   
+    # Calcula e exibe o valor máximo da lista
+    valor_maximo = max(volume_total_acumulado_list)
+    # Exibe o valor total acumulado e o valor máximo no sidebar
 
+    st.sidebar.subheader(f"Saldo total aplicado: R$ {valor_maximo}")
     
     # Exibir a tabela no Streamlit
-    col1.subheader("Lista de ativos na carteira")
+    col1.subheader("Últimas transações")
     col1.table(df)
 
-    col2.subheader("Volume por operação e acumulado")
+    col2.subheader("Fluxo de volume")
     col2.area_chart(df[["Valor Pago", "Volume Total Acumulado"]])
 
-    chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
-    col2.chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
-    # Adicione um título à aplicação
-    st.subheader('Gráfico de atividades')
+    # Gráfico de atividades de compra
+    col2.subheader('Fluxo de operações por período')
+    chart_data = pd.DataFrame(formatted_data, columns=["Data Transação"])
+    col2.line_chart(chart_data)
 
-    st.scatter_chart(chart_data)
+    # Gráfico de atividades de compra
+    col1.subheader('Composição da carteira')
+    chart_data = pd.DataFrame(formatted_data, columns=["Ativo"])
+    col1.scatter_chart(chart_data)
 
     # Fechar conexão
     conn.close()
