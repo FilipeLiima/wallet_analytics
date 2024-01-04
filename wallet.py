@@ -63,13 +63,20 @@ def main():
     formatted_data = []
 
     # Iterar sobre as transações e adicionar dados formatados à lista
+    volume_total_acumulado = 0
+    volume_total_acumulado_list = []  # Lista para armazenar o volume total acumulado a cada operação
+
+    # Iterar sobre as transações e adicionar dados formatados à lista
     for ativo in ativos:
+        volume_total_acumulado += ativo[3]  # Adiciona o valor pago ao volume total acumulado
+        volume_total_acumulado_list.append(volume_total_acumulado)
         formatted_data.append({
             "Ativo": ativo[0],
             "Usuário ID": ativo[1],
             "Quantidade": format_decimal(ativo[2]),
             "Valor Pago": format_decimal(ativo[3]),
             "Data Transação": format_datetime(ativo[4]),
+            "Volume Total Acumulado": format_decimal(volume_total_acumulado),
         })
 
     # Criar um DataFrame Pandas com os dados formatados
@@ -80,9 +87,8 @@ def main():
     col1.subheader("Lista de ativos na carteira")
     col1.table(df)
 
-    col2.subheader("Evolução da carteira por operação")
-    col2.area_chart(df["Valor Pago"])
-
+    col2.subheader("Volume por operação e acumulado")
+    col2.area_chart(df[["Valor Pago", "Volume Total Acumulado"]])
 
     chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
     col2.chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
