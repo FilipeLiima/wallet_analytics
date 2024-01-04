@@ -81,7 +81,15 @@ def main():
     col1.table(df)
 
     col2.subheader("Evolução da carteira por operação")
-    col2.line_chart(df["Valor Pago"])
+    col2.area_chart(df["Valor Pago"])
+
+
+    chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
+    col2.chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
+    # Adicione um título à aplicação
+    st.subheader('Gráfico de atividades')
+
+    st.scatter_chart(chart_data)
 
     # Fechar conexão
     conn.close()
