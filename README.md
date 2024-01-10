@@ -10,3 +10,4 @@ Roadmap de funções a serem implementadas:
 - FLUXO DE OPERAÇÃO = ajustar os eixos para compra e venda x datetime e ajustar o df para exibir apenas os meses no fluxo de operações.
 - Analytics
 - Machine Learning
+- Deep Learning
