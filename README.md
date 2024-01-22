@@ -1,6 +1,4 @@
-# Visão geral =
-
-ROADMAP
+# ROADMAP
 
 - Reformulação de app com finalidade de trabalhar com grandes volumes de dados e consumi-los em tempo real de uma api.
 
