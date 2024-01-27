@@ -34,8 +34,24 @@ with col1:
 
 # Adicionar gráfico à direita
 with col2:
+    # Adicionar checkboxes em uma linha
+    checks = st.columns(5)
+    with checks[0]:
+        st.button('TVL')
+    with checks[1]:
+        st.button('Mcap')
+    with checks[2]:
+        st.button('Price')
+    with checks[3]:
+        st.button('Vol')
+    with checks[4]:
+        st.button('Activity')    
+
+    # Adicionar o restante do conteúdo (gráfico, etc.) aqui
     chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
     st.line_chart(chart_data)
+
+  
 
 # Adicionar informações abaixo das colunas
 st.subheader("Informações adicionais")
