@@ -25,5 +25,3 @@ A plataforma de dados em tempo real sobre criptoativos é uma aplicação constr
 
 Além disso, o projeto serve como um excelente exemplo de como integrar tecnologias de big data, machine learning e processamento em tempo real para criar uma plataforma poderosa e inovadora no campo das finanças e tecnologia blockchain.
 
-Prévia: 
-![image](https://github.com/FilipeLiima/wallet_analytics/assets/131200594/ac488bcc-c7c4-4d1e-8bae-0fd7a392e706)
